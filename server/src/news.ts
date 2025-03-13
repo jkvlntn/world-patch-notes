@@ -1,15 +1,14 @@
 import { NewsData } from "./types";
 
-export let fetchNews = async (
-	page: string
-): Promise<[Array<NewsData>, string]> => {
+let fetchNews = async (page: string): Promise<[Array<NewsData>, string]> => {
 	let url = "https://newsdata.io/api/1/latest?";
-	const varsURL = "apikey=" + process.env.NEWS_API_KEY + "&prioritydomain=top";
+	const varsURL =
+		"apikey=" + process.env.NEWS_API_KEY + "&prioritydomain=top&language=en";
 	url += varsURL;
 	if (page && page != "") {
 		url += "&page=" + page;
 	}
-
+	console.log(url);
 	let response = await fetch(url);
 	if (!response.ok) {
 		throw new Error("Failed to fetch from api");

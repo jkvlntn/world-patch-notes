@@ -15,11 +15,11 @@ export let fetchPatchNotes = async (
 	newsData: Array<NewsData>
 ): Promise<string> => {
 	const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-	const newsJSON = require("../data.json");
 	const response = await client.responses.create({
-		model: "gpt-4o",
+		model: "gpt-3.5-turbo",
 		instructions: instructions,
-		input: JSON.stringify(newsJSON),
+		input: JSON.stringify(newsData),
 	});
+	console.log(response);
 	return response.output_text;
 };
